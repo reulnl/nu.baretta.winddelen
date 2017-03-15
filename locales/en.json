@@ -1,0 +1,12 @@
+{
+	"pair": {
+		"pair": {
+      "intro": "Give the sensor a name, select a windmill and enter the number of shares.",
+			"title": "Selecting windmill...",
+			"error": "An error has occurred.",
+      "windmillID": "Windmill",
+			"name": "Name",
+      "validate": "Save settings"
+		}
+  }
+}

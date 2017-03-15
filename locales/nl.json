@@ -1,0 +1,12 @@
+{
+	"pair": {
+		"start": {
+      "intro": "Geef de sensor een naam, selecteer een molen en geeft het aantal winddelen op.",
+			"title": "Molen selecteren...",
+			"error": "Er is een fout opgetreden.",
+      "windmillID": "Windmolen",
+			"Name": "Naam van de sensor",
+      "validate": "Gegevens opslaan"
+		}
+  }
+}

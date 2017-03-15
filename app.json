@@ -1,0 +1,119 @@
+{  
+   "id":"nu.baretta.winddelen",
+   "name":{  
+      "en":"Winddelen"
+   },
+   "version":"0.0.1",
+   "compatibility":"0.x || 1.x",
+   "author":{  
+      "name":"Anne Baretta",
+      "email":"dev@baretta.nu"
+   },
+    "tags": {
+        "en": [ "winddelen windcentrale windenergy" ]
+    },
+   "images":{  
+      "large":"./assets/images/large.jpg",
+      "small":"./assets/images/small.jpg"
+   },
+   "category":"energy",
+   "description":{  
+      "en":"Winddelen production app for Homey",
+      "nl":"Winddelen productie app for Homey"
+   },
+   "dependencies": {
+        "net": "*",
+    	"http.min": "^1.3.0",
+    	"xml2js": "^0.4.17"
+   },
+   "capabilities": {
+            "measure_wind": {
+            "type": "string",
+            "title": {
+                "en": "Wind",
+                "nl": "Wind"
+            },
+            "getable": true,
+            "setable": false
+                },
+            "meter_year": {
+            "type": "number",
+            "title": {
+                "en": "Year",
+                "nl": "Jaar"
+            },
+            "getable": true,
+            "setable": false,
+	    "units": {"en": "KWh"},
+	    "decimals": 2,
+	    "chartType": "spline"
+                },
+            "meter_lifetime": {
+            "type": "number",
+            "title": {
+                "en": "Lifetime",
+                "nl": "Totaal"
+            },
+            "getable": true,
+            "setable": false,
+	    "units": {"en": "MWh"},
+	    "decimals": 2,
+	    "chartType": "spline"
+                }
+	},
+   "drivers":[  
+      {  
+         "id":"winddelen",
+         "name":{  
+            "en":"winddelen",
+            "nl":"winddelen"
+         },
+         "pair":[  
+            {  
+               "id":"pair"
+            }
+         ],
+         "images":{  
+            "large":"./drivers/winddelen/assets/images/large.jpg",
+            "small":"./drivers/winddelen/assets/images/small.jpg"
+         },
+         "class":"sensor",
+         "capabilities":[  
+            "measure_power",
+            "meter_power",
+            "meter_year",
+            "meter_lifetime",
+	    "measure_wind"
+         ],
+         "mobile":{  
+            "components":[  
+               {  
+                  "id":"icon"
+               },
+               {
+                  "id":"sensor",
+                  "capabilities":[  
+                     "measure_wind",
+		     "measure_power",
+		     "meter_year",
+		     "meter_lifetime"
+                  ],
+                  "options":{  
+                     "icons":{  
+                        "measure_wind":"./drivers/winddelen/assets/weathervane.svg",
+                        "meter_lifetime":"./drivers/winddelen/assets/windmill.svg",
+                        "meter_year":"./drivers/winddelen/assets/plug-energy.svg"
+                     }
+                  }
+               },
+               {  
+                  "id":"sensor",
+                  "capabilities":[  
+                     "meter_power"
+                  ]
+               }
+	    ]
+         }
+      }
+   ]
+}
