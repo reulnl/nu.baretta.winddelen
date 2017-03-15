@@ -214,11 +214,11 @@ function checkProduction(device_data) {
             device.lifetime = yieldLifetime / 1000;
             module.exports.realtime(device_data, "meter_lifetime", device.lifetime);
 
-            Homey.log("[" + device_data.name + "] Number of shares per mill: " + winddelenpermill);
-            Homey.log("[" + device_data.name + "] Production today: " + energy);
-            Homey.log("[" + device_data.name + "] Energy: " + energy + "KWh");
-            Homey.log("[" + device_data.name + "] Year to date: " + yieldYearly + "KWh");
-            Homey.log("[" + device_data.name + "] Lifetime: " + yieldLifetime + "MWh");
+            Homey.log("Winddelen app - [" + device_data.name + "] Number of shares per mill: " + winddelenpermill);
+            Homey.log("Winddelen app - [" + device_data.name + "] Production today: " + energy);
+            Homey.log("Winddelen app - [" + device_data.name + "] Energy: " + energy + "KWh");
+            Homey.log("Winddelen app - [" + device_data.name + "] Year to date: " + yieldYearly + "KWh");
+            Homey.log("Winddelen app - [" + device_data.name + "] Lifetime: " + yieldLifetime + "MWh");
         } else {
             Homey.log("Winddelen app - [" + device_data.name + "] URL2: " + url2 + " did not load");
         }
