@@ -168,7 +168,7 @@ function checkProduction(device_data) {
                 // response[4] -> 66, ?
                 // response[5] -> 19.4, temp?
                 // response[6] -> 0, ?
-                // response[7] -> total lifetime energy (KWh),
+                // response[7] -> total lifetime energy (kWh),
                 // response[8] -> 1609.0833, ?
                 // response[9] -> N 4, ?
                 // response[10] -> 1489318632,?
@@ -215,8 +215,8 @@ function checkProduction(device_data) {
             module.exports.realtime(device_data, "meter_lifetime", device.lifetime);
 
             Homey.log("Winddelen app - [" + device_data.name + "] Number of shares per mill: " + winddelenpermill);
-            Homey.log("Winddelen app - [" + device_data.name + "] Production today: " + device.energy + "KWh");
-            Homey.log("Winddelen app - [" + device_data.name + "] Year to date: " + device.year + "KWh");
+            Homey.log("Winddelen app - [" + device_data.name + "] Production today: " + device.energy + "kWh");
+            Homey.log("Winddelen app - [" + device_data.name + "] Year to date: " + device.year + "kWh");
             Homey.log("Winddelen app - [" + device_data.name + "] Lifetime: " + device.lifetime + "MWh");
         } else {
             Homey.log("Winddelen app - [" + device_data.name + "] URL2: " + url2 + " did not load");
