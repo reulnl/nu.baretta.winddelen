@@ -44,7 +44,7 @@
             },
             "getable": true,
             "setable": false,
-	    "units": {"en": "KWh"},
+	    "units": {"en": "kWh"},
 	    "decimals": 2,
 	    "chartType": "spline"
                 },
