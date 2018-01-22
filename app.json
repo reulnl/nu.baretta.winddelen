@@ -13,8 +13,8 @@
         "en": [ "winddelen windcentrale windenergy" ]
     },
    "images":{  
-      "large":"./assets/images/large.jpg",
-      "small":"./assets/images/small.jpg"
+      "large":"./assets/images/large.png",
+      "small":"./assets/images/small.png"
    },
    "category":"energy",
    "description":{  
@@ -74,8 +74,8 @@
             }
          ],
          "images":{  
-            "large":"./drivers/winddelen/assets/images/large.jpg",
-            "small":"./drivers/winddelen/assets/images/small.jpg"
+            "large":"./drivers/winddelen/assets/images/large.png",
+            "small":"./drivers/winddelen/assets/images/small.png"
          },
          "class":"sensor",
          "capabilities":[  
