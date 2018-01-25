@@ -54,7 +54,7 @@ class winddelen extends Homey.Device {
             .catch(err => {
                 if (err.code == 404) {
                     this.log("The task has not been registered yet, registering task: " + cronName);
-                    Homey.ManagerCron.registerTask(cronName, "5-59/2 * * * *", settings)
+                    Homey.ManagerCron.registerTask(cronName, "3-59/5 * * * *", settings)
                         //Homey.ManagerCron.registerTask(cronName, "*/1 * * * * ", settings)
                         .then(task => {
                             task.on('run', () => this.checkProduction(settings));
