@@ -7,7 +7,7 @@ Based on the 'Solar panels' app by Diederik Bakker.
 ![](https://drive.google.com/uc?id=0B4QdLfQ7j41JU0hyTTFOQTNWUG8)
 
 ## Release notes
-* 0.0.1 - First release
+* 0.0.5 - Fixed 'lifetime yield' value, KWh was displayed instead of MWh 
 
 ---
 # Adding a Windcentrale windmill

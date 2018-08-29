@@ -36,16 +36,6 @@ class winddelen extends Homey.Device {
         let tokens = {};
         let state = {};
 
-        // updating settings object for settings dialogue
-        /*      this.setSettings({
-                      language: Homey.ManagerI18n.getLanguage(),
-                      units: Homey.ManagerI18n.getUnits(),
-                      lat: Homey.ManagerGeolocation.getLatitude(),
-                      lon: Homey.ManagerGeolocation.getLongitude(),
-                  })
-                  //.then(this.log)
-                  .catch(this.error) */
-
         Homey.ManagerCron.getTask(cronName)
             .then(task => {
                 this.log("The task exists: " + cronName);
@@ -55,7 +45,6 @@ class winddelen extends Homey.Device {
                 if (err.code == 404) {
                     this.log("The task has not been registered yet, registering task: " + cronName);
                     Homey.ManagerCron.registerTask(cronName, "3-59/5 * * * *", settings)
-                        //Homey.ManagerCron.registerTask(cronName, "*/1 * * * * ", settings)
                         .then(task => {
                             task.on('run', () => this.checkProduction(settings));
                         })
@@ -85,7 +74,6 @@ class winddelen extends Homey.Device {
         let cronName = name.toLowerCase();
         this.log('Unregistering cron:', cronName);
         Homey.ManagerCron.unregisterTask(cronName, function (err, success) {});
-       // Homey.ManagerCron.unregisterAllTasks(function (err, success) {});
 
         this.log('device deleted:', id);
 
@@ -156,7 +144,8 @@ class winddelen extends Homey.Device {
                     var winddelenpermill = etree.findall('./productie')[0].get('winddelen');
                     var energy = Number(etree.findall('./productie/subset')[0].get('sum')) / winddelenpermill * numberofwinddelen;
                     var yieldYearly = Number(etree.findall('./productie/subset/[@interval="MONTH"]')[0].get('sum')) / winddelenpermill * numberofwinddelen;
-                    var yieldLifetime = Number(etree.findall('./productie/subset/[@interval="YEAR"]')[0].get('sum')) / winddelenpermill * numberofwinddelen;
+                    // output in KWh, using MWh in interface
+                    var yieldLifetime = Number(etree.findall('./productie/subset/[@interval="YEAR"]')[0].get('sum')) / winddelenpermill * numberofwinddelen / 1000;
 
                     if (this.getCapabilityValue('meter_power') != energy) {
                         this.setCapabilityValue('meter_power', energy);
@@ -183,27 +172,5 @@ class winddelen extends Homey.Device {
     }
 
 }
-
-/*
-onSettings(settings, newSettingsObj, changedKeysArr, callback) {
-    try {
-        for (var i = 0; i < changedKeysArr.length; i++) {
-            switch (changedKeysArr[i]) {
-                case 'numberofwinddelen':
-                    this.log('numberofwinddelen changed to ' + newSettingsObj.numberofwinddelen);
-                    settings.numberofwinddelen = newSettingsObj.numberofwinddelen;
-                    break;
-
-                default:
-                    this.log("Key not matched: " + i);
-                    break;
-            }
-        }
-        this.checkProduction(settings);
-        callback(null, true)
-    } catch (error) {
-        callback(error, null)
-    }
-} */
 
 module.exports = winddelen;
