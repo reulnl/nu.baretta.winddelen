@@ -86,7 +86,8 @@ class winddelen extends Homey.Device {
         // fetch current power and wind speed and direction
         this.log("settings['windmillID']: ");
         this.log(settings['windmillID']);
-        var url1 = baseurl1 + "?id=" + settings['windmillID'];
+        //var url1 = baseurl1 + "?id=" + settings['windmillID'];
+        var url1 = baseurl1 + "_" + settings['windmillID'] + ".txt";
         var url2 = baseurl2 + settings['windmillID'];
 
         var DATA = http.get(url1, (result) => {
