@@ -68,7 +68,7 @@
 		$('#validate').click(function () {
 
 			// variables
-			var id = Math.round(Math.random() * (100000 - 10000) + 10000);
+                        var id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1) + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 			var windmillID = document.getElementById('windmillID').value;
 			var numberofwinddelen = document.getElementById('numberofwinddelen').value;
 			var name = document.getElementById('name').value;

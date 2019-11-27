@@ -74,6 +74,7 @@ class winddelen extends Homey.Device {
         let cronName = name.toLowerCase();
         this.log('Unregistering cron:', cronName);
         Homey.ManagerCron.unregisterTask(cronName, function (err, success) {});
+        //Homey.ManagerCron.unregisterAllTasks(function (err, success) {});
 
         this.log('device deleted:', id);
 
@@ -114,7 +115,7 @@ class winddelen extends Homey.Device {
                         // response[10] -> 1489318632,?
                         // response[11] -> 71764 ?
 
-                        var power = Number(response[2]) * numberofwinddelen;
+                        var power = Number(response[2]) * numberofwinddelen * -1;
                         var wind = response[0];
 
                         if (this.getCapabilityValue('measure_power') != power) {
@@ -143,13 +144,13 @@ class winddelen extends Homey.Device {
 
                     var etree = et.parse(result.data);
                     var winddelenpermill = etree.findall('./productie')[0].get('winddelen');
-                    var energy = Number(etree.findall('./productie/subset')[0].get('sum')) / winddelenpermill * numberofwinddelen;
-                    var yieldYearly = Number(etree.findall('./productie/subset/[@interval="MONTH"]')[0].get('sum')) / winddelenpermill * numberofwinddelen;
+                    var energy = Number(etree.findall('./productie/subset')[0].get('sum')) / winddelenpermill * numberofwinddelen * -1;
+                    var yieldYearly = Number(etree.findall('./productie/subset/[@interval="MONTH"]')[0].get('sum')) / winddelenpermill * numberofwinddelen * -1;
                     // output in KWh, using MWh in interface
-                    var yieldLifetime = Number(etree.findall('./productie/subset/[@interval="YEAR"]')[0].get('sum')) / winddelenpermill * numberofwinddelen / 1000;
+                    var yieldLifetime = Number(etree.findall('./productie/subset/[@interval="YEAR"]')[0].get('sum')) / winddelenpermill * numberofwinddelen / 1000 * -1;
 
                     if (this.getCapabilityValue('meter_power') != energy) {
-                        this.setCapabilityValue('meter_power', energy);
+                        this.setCapabilityValue('meter_power', energy );
                     }
 
                     if (this.getCapabilityValue('meter_year') != yieldYearly) {
