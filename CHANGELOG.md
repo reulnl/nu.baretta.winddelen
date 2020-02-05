@@ -1,5 +1,4 @@
 # Changelog
 
-**Version 0.0.6**
-- URL with current data broken, reverted to old URL: https://backend.windcentrale.nl/windcentrale/productie_<mill-ID>.txt
-- Removed unnecessary libraries, reducing the size of the app.
+**Version 0.0.9**
+- change app class to 'solarpanel' so the generated power and energy is correctly displayed in the Homey energy tab.

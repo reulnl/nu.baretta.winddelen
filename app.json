@@ -4,7 +4,7 @@
     "name": {
         "en": "Winddelen"
     },
-    "version": "0.0.8",
+    "version": "0.0.9",
     "compatibility": ">=1.5.0",
     "homeyCommunityTopicId" : 1179,
     "author": {
@@ -105,7 +105,7 @@
             "large": "./drivers/winddelen/assets/images/large.png",
             "small": "./drivers/winddelen/assets/images/small.png"
         },
-        "class": "sensor",
+        "class": "solarpanel",
         "capabilities": [
             "measure_power",
             "meter_power",
