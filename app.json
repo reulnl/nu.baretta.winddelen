@@ -5,7 +5,7 @@
     "name": {
         "en": "Winddelen"
     },
-    "version": "0.1.0",
+    "version": "0.1.1",
     "compatibility": ">=1.5.0",
     "homeyCommunityTopicId" : 1179,
     "author": {
@@ -19,6 +19,9 @@
         },{
             "name": "Johan Bendz",
             "email": "johan_bendz@hotmail.com"
+        },{
+            "name": "Raoul Brouns",
+            "email": "info@raoulbrouns.nl"
         }]
     },
     "contributing": {
@@ -55,8 +58,8 @@
         "xml2js": "^0.4.17"
     },
     "capabilities": {
-        "measure_wind": {
-            "type": "string",
+        "measure_wind_strength": {
+            "type": "number",
             "title": {
                 "en": "Wind",
                 "nl": "Wind"
@@ -112,7 +115,7 @@
             "meter_power",
             "meter_year",
             "meter_lifetime",
-            "measure_wind"
+            "measure_wind_strength"
         ],
         "mobile": {
             "components": [{
@@ -121,14 +124,14 @@
                 {
                     "id": "sensor",
                     "capabilities": [
-                        "measure_wind",
+                        "measure_wind_strength",
                         "measure_power",
                         "meter_year",
                         "meter_lifetime"
                     ],
                     "options": {
                         "icons": {
-                            "measure_wind": "./drivers/winddelen/assets/weathervane.svg",
+                            "measure_wind_strength": "./drivers/winddelen/assets/weathervane.svg",
                             "meter_lifetime": "./drivers/winddelen/assets/windmill.svg",
                             "meter_year": "./drivers/winddelen/assets/plug-energy.svg"
                         }

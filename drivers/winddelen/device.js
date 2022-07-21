@@ -89,13 +89,14 @@ class winddelen extends Homey.Device {
         this.log(settings['windmillID']);
         //var url1 = baseurl1 + "?id=" + settings['windmillID'];
         var url1 = baseurl1 + settings['windmillID'] + "/live";
+		this.log("Live URL: - " + url1);
         var url2 = baseurl2 + settings['windmillID'];
 
-        var DATA = http.get(url1, (result) => {
+        httpmin.get(url1).then((result) => {
 
-            if (result.statusCode == 200) {
+            if (result.response.statusCode == 200) {
 
-				var obj = JSON.parse(result);
+				var obj = JSON.parse(result.data);
                 
 
                         var power = (obj["powerAbsWd"]) * numberofwinddelen;
@@ -105,20 +106,20 @@ class winddelen extends Homey.Device {
                             this.setCapabilityValue('measure_power', power);
                         }
 
-                        if (this.getCapabilityValue('measure_wind') != wind) {
-                            this.setCapabilityValue('measure_wind', wind);
+                        if (this.getCapabilityValue('measure_wind_strength') != wind) {
+                            this.setCapabilityValue('measure_wind_strength', wind);
                         }
 
                         //   this.log("Winddelen app - [" + this.getName() + "] Energy: " + energy + "kWh");
                         this.log("Winddelen app - [" + this.getName() + "] Power: " + power + "W");
-                        this.log("Winddelen app - [" + this.getName() + "] Wind: " + wind + " Bft");
+                        this.log("Winddelen app - [" + this.getName() + "] Wind: " + wind + "km/h");
 
-                );
+                
             } else {
                 this.log("Winddelen app - [" + this.getName()  + "] Unavailable: " + result.response.statusCode + " error");
             }
-        });
-        DATA.on('error', (err) => {
+        })
+        .catch((err) => {
             this.log("Winddelen app - [" + this.getName() + "]" + ` problem with request: ${err.message}`);
         });
 
