@@ -65,7 +65,10 @@
                 "nl": "Wind"
             },
             "getable": true,
-            "setable": false
+            "setable": false,
+            "units": {
+                "en": "km/h"
+            }
         },
         "meter_year": {
             "type": "number",
