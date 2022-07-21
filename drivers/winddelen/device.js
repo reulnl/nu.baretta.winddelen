@@ -12,7 +12,7 @@ var Element = et.Element;
 var SubElement = et.SubElement;
 
 var devices = {};
-var baseurl1 = "https://backend.windcentrale.nl/windcentrale/productie"
+var baseurl1 = "https://zep-api.windcentrale.nl/production/"
 var baseurl2 = "https://zep-api.windcentrale.nl/production/"
 
 class winddelen extends Homey.Device {
@@ -88,35 +88,18 @@ class winddelen extends Homey.Device {
         this.log("settings['windmillID']: ");
         this.log(settings['windmillID']);
         //var url1 = baseurl1 + "?id=" + settings['windmillID'];
-        var url1 = baseurl1 + "_" + settings['windmillID'] + ".txt";
+        var url1 = baseurl1 + settings['windmillID'] + "/live";
         var url2 = baseurl2 + settings['windmillID'];
 
         var DATA = http.get(url1, (result) => {
 
             if (result.statusCode == 200) {
 
-                result.on('data', (body) => {
-                    var response = body.toString().split(",");
-                    // the winddelen backend will continue outputting data for minutes, only need 1 line
-                    result.destroy();
+				var obj = JSON.parse(result);
+                
 
-                        // sample output:
-                        // ZO 5,1455,147,62,66,19.4,0,1031797,1609.0833333333,N 4,1489318632,71764
-                        // response[0] -> wind direction and force (Beaufort)
-                        // response[1] -> current total power for windmill
-                        // response[2] -> current power per share
-                        // response[3] -> % of max. power
-                        // response[4] -> 66, ?
-                        // response[5] -> 19.4, temp?
-                        // response[6] -> 0, ?
-                        // response[7] -> total lifetime energy (kWh),
-                        // response[8] -> 1609.0833, ?
-                        // response[9] -> N 4, ?
-                        // response[10] -> 1489318632,?
-                        // response[11] -> 71764 ?
-
-                        var power = Number(response[2]) * numberofwinddelen;
-                        var wind = response[0];
+                        var power = (obj["powerAbsWd"]) * numberofwinddelen;
+                        var wind = (obj["windSpeed"]);
 
                         if (this.getCapabilityValue('measure_power') != power) {
                             this.setCapabilityValue('measure_power', power);
@@ -130,7 +113,7 @@ class winddelen extends Homey.Device {
                         this.log("Winddelen app - [" + this.getName() + "] Power: " + power + "W");
                         this.log("Winddelen app - [" + this.getName() + "] Wind: " + wind + " Bft");
 
-                });
+                );
             } else {
                 this.log("Winddelen app - [" + this.getName()  + "] Unavailable: " + result.response.statusCode + " error");
             }
