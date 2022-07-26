@@ -1,7 +1,8 @@
-/* From Homey SDK 2.0 docs: The file device.js is a representation of an already paired device on Homey */
 'use strict';
 
 const Homey = require('homey');
+
+const POLL_INTERVAL = 60 * 1000; 
 
 var http = require("https");
 var httpmin = require("http.min");
@@ -17,7 +18,7 @@ var baseurl2 = "https://zep-api.windcentrale.nl/production/"
 
 class winddelen extends Homey.Device {
 
-    onInit() {
+    async onInit() {
         this.log('device init');
         console.dir("getData: "); // for debugging
         console.dir(this.getData()); // for debugging
@@ -29,44 +30,28 @@ class winddelen extends Homey.Device {
         this.log(settings['windmillID']);
         this.log(settings['numberofwinddelen']);
         this.log(settings);
-        let name = this.getName() + '_' + this.getData().id;
-        let cronName = name.toLowerCase();
-        this.log("cronName: ");
-        this.log(cronName);
         let tokens = {};
         let state = {};
-
-        Homey.ManagerCron.getTask(cronName)
-            .then(task => {
-                this.log("The task exists: " + cronName);
-                task.on('run', () => this.checkProduction(settings));
-            })
-            .catch(err => {
-                if (err.code == 404) {
-                    this.log("The task has not been registered yet, registering task: " + cronName);
-                    Homey.ManagerCron.registerTask(cronName, "3-59/5 * * * *", settings)
-                        .then(task => {
-                            task.on('run', () => this.checkProduction(settings));
-                        })
-                        .catch(err => {
-                            this.log(`problem with registering cronjob: ${err.message}`);
-                        });
-                } else {
-                    this.log(`other cron error: ${err.message}`);
-                }
-            });
 
         //run once to get the first data
         this.checkProduction(settings);
 
+        this.homey.setInterval(async () => {
+            await this.checkProduction(settings);
+        }, POLL_INTERVAL);
+
     } // end onInit
 
-    onAdded() {
+
+
+
+   onAdded() {
         let id = this.getData().id;
         this.log('device added: ', id);
 
     } // end onAdded
 
+ /* 
     onDeleted() {
 
         let id = this.getData().id;
@@ -79,7 +64,7 @@ class winddelen extends Homey.Device {
         this.log('device deleted:', id);
 
     } // end onDeleted
-
+*/
     checkProduction(settings) {
 
         var numberofwinddelen = settings['numberofwinddelen'];
@@ -89,7 +74,7 @@ class winddelen extends Homey.Device {
         this.log(settings['windmillID']);
         //var url1 = baseurl1 + "?id=" + settings['windmillID'];
         var url1 = baseurl1 + settings['windmillID'] + "/live";
-		this.log("Live URL: - " + url1);
+		this.log("Live API URL: - " + url1);
         var url2 = baseurl2 + settings['windmillID'];
 
         httpmin.get(url1).then((result) => {

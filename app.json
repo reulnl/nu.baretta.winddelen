@@ -1,16 +1,16 @@
 {
     "id": "nu.baretta.winddelen",
-    "sdk": 2,
+    "sdk": 3,
     "brandColor": "#23A1E2",
     "name": {
         "en": "Winddelen"
     },
-    "version": "0.1.1",
-    "compatibility": ">=1.5.0",
+    "version": "0.1.2",
+    "compatibility": ">=5.0.0",
     "homeyCommunityTopicId" : 1179,
     "author": {
-        "name": "Anne Baretta",
-        "email": "dev@baretta.nu"
+        "name": "Raoul Brouns",
+        "email": "info@raoulbrouns.nl"
     },
     "contributors": {
         "developers": [{
@@ -27,7 +27,7 @@
     "contributing": {
         "donate": {
             "paypal": {
-                "username": "abaretta"
+                "username": "reulnl"
             }
         }
     },
@@ -49,8 +49,8 @@
     },
     "category": "energy",
     "description": {
-        "en": "Winddelen production app for Homey",
-        "nl": "Winddelen productie app for Homey"
+        "en": "Follow your windshares production",
+        "nl": "Volg je winddelen productie"
     },
     "dependencies": {
         "net": "*",

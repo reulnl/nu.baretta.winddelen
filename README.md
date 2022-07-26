@@ -6,9 +6,6 @@ Based on the 'Solar panels' app by Diederik Bakker.
 ![](https://drive.google.com/uc?id=0B4QdLfQ7j41JOHB4ZTVOQjdlV0U)
 ![](https://drive.google.com/uc?id=0B4QdLfQ7j41JU0hyTTFOQTNWUG8)
 
-## Release notes
-* 0.0.5 - Fixed 'lifetime yield' value, KWh was displayed instead of MWh 
-
 ---
 # Adding a Windcentrale windmill
 Select the windmill you participate in and enter the number of 'winddelen' (shares):
@@ -24,5 +21,5 @@ Homey shows your winddelen output as a sensor. This app currently includes the f
 The Winddelen app can be used as a sensor for Homey. This allows you to use logic on your production data. 
 
 ## Insights
-Homey retrieves data from the 'Windcentrale' every five minutes, but only logs new data. You can add more than one windmill, and each will be logged in a separate graph.
+Homey retrieves data from the 'Windcentrale' every minute, but only logs new data. You can add more than one windmill, and each will be logged in a separate graph.
 
