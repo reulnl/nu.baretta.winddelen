@@ -4,7 +4,7 @@ const Homey = require('homey');
 
 class winddelenDriver extends Homey.Driver {
 
-    onPair(socket) {
+    onPair(session) {
 
         let devices = [
             {
@@ -18,13 +18,13 @@ class winddelenDriver extends Homey.Driver {
         ]
 
         // this is called when the user presses save settings button in pair.html
-        socket.on('get_devices', (device_data, callback) => {
+        session.setHandler("get_devices", async (data) => {
             devices = device_data;
-            callback(null, devices);
+            return devices;
         });
 
         // this happens when user clicks away the pairing windows
-        socket.on('disconnect', () => {
+        session.setHandler('disconnect', () => {
             this.log("Winddelen - Pairing is finished (done or aborted) ");
         })
 

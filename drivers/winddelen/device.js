@@ -36,7 +36,7 @@ class winddelen extends Homey.Device {
         //run once to get the first data
         this.checkProduction(settings);
 
-        this.homey.setInterval(async () => {
+        this.update = this.homey.setInterval(async () => {
             await this.checkProduction(settings);
         }, POLL_INTERVAL);
 
@@ -50,21 +50,25 @@ class winddelen extends Homey.Device {
         this.log('device added: ', id);
 
     } // end onAdded
-
- /* 
+ 
     onDeleted() {
 
         let id = this.getData().id;
-        let name = this.getName() + '_' + this.getData().id;
-        let cronName = name.toLowerCase();
-        this.log('Unregistering cron:', cronName);
-        Homey.ManagerCron.unregisterTask(cronName, function (err, success) {});
-        //Homey.ManagerCron.unregisterAllTasks(function (err, success) {});
-
+        
+        //reset update cycle
+        this.homey.clearInterval(this.update);
+        this.update = undefined;
         this.log('device deleted:', id);
+    
+        this.checkProduction(settings);
+        this.update = this.homey.setInterval(async () => {
+            await this.checkProduction(settings);
+        }, POLL_INTERVAL);
+
+        this.log("reset update cycle");
 
     } // end onDeleted
-*/
+
     checkProduction(settings) {
 
         var numberofwinddelen = settings['numberofwinddelen'];
